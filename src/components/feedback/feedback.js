@@ -2,8 +2,6 @@ import React from "react";
 import FeedbackOptions from "./FeedbackOptions";
 import Statistic from "../statistics/statistics";
 
-// import PropTypes from "prop-types";
-
 class Feedback extends React.Component {
   state = {
     good: 0,
@@ -19,37 +17,25 @@ class Feedback extends React.Component {
   positiveFeedback = () => {
     return Math.floor((this.state.good / this.totalFeedback()) * 100);
   };
-  onBtnClickGood = () => {
-    this.setState((prevState) => {
-      return { good: prevState.good + 1 };
-    });
-  };
-  onBtnClickNeutral = () => {
-    this.setState((prevState) => {
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-  onBtnClickBad = () => {
-    this.setState((prevState) => {
-      return { bad: prevState.bad + 1 };
-    });
-  };
+
   render() {
+    const { good, neutral, bad } = this.state;
+    const options = Object.keys(this.state);
     const totalNumber = this.totalFeedback();
 
     return (
       <>
+        <h2>Please leave feedback</h2>
         <FeedbackOptions
-          onGood={this.onBtnClickGood}
-          onNeutral={this.onBtnClickNeutral}
-          onBad={this.onBtnClickBad}
+          options={options}
+          onLeaveFeedback={this.onLeaveFeedback}
         />
 
         {totalNumber ? (
           <Statistic
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             total={this.totalFeedback()}
             positive={this.positiveFeedback()}
           />
@@ -60,6 +46,5 @@ class Feedback extends React.Component {
     );
   }
 }
-// Feedback.propTypes = {};
 
 export default Feedback;
