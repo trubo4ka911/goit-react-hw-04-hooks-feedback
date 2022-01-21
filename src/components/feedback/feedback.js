@@ -1,50 +1,46 @@
 import React from "react";
-import FeedbackOptions from "./FeedbackOptions";
+import { useState } from "react";
+import FeedbackOptions from "../FeedbackOptions/FeedbackOptions";
 import Statistic from "../statistics/statistics";
 
-class Feedback extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+const Feedback = () => {
+  const [feedbacks, setFeedbacks] = useState({ good: 0, neutral: 0, bad: 0 });
+
+  const onLeaveFeedback = (option) => {
+    setFeedbacks((prevState) => ({
+      ...prevState,
+      [option]: prevState[option] + 1,
+    }));
   };
-  onLeaveFeedback = (option) => {
-    this.setState((prevState) => ({ [option]: prevState[option] + 1 }));
+  const totalFeedback = () => {
+    return Object.values(feedbacks).reduce((acc, value) => acc + value, 0);
   };
-  totalFeedback = () => {
-    return Object.values(this.state).reduce((acc, value) => acc + value, 0);
-  };
-  positiveFeedback = () => {
-    return Math.floor((this.state.good / this.totalFeedback()) * 100);
+  const positiveFeedback = () => {
+    return Math.floor((feedbacks.good / totalFeedback()) * 100);
   };
 
-  render() {
-    const { good, neutral, bad } = this.state;
-    const options = Object.keys(this.state);
-    const totalNumber = this.totalFeedback();
+  const { good, neutral, bad } = feedbacks;
+  const options = Object.keys(feedbacks);
+  const totalNumber = totalFeedback();
 
-    return (
-      <>
-        <h2>Please leave feedback</h2>
-        <FeedbackOptions
-          options={options}
-          onLeaveFeedback={this.onLeaveFeedback}
+  return (
+    <>
+      <h2>Please leave feedback</h2>
+      <FeedbackOptions options={options} onLeaveFeedback={onLeaveFeedback} />
+
+      {totalNumber ? (
+        <Statistic
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={totalFeedback()}
+          positive={positiveFeedback()}
         />
-
-        {totalNumber ? (
-          <Statistic
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={this.totalFeedback()}
-            positive={this.positiveFeedback()}
-          />
-        ) : (
-          <p>There is no feedback</p>
-        )}
-      </>
-    );
-  }
-}
+      ) : (
+        <p>There is no feedback</p>
+      )}
+    </>
+  );
+};
 
 export default Feedback;
