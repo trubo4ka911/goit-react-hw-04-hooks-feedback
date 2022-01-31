@@ -1,4 +1,4 @@
-import "./App.css";
+import React from "react";
 import Feedback from "./components/feedback/feedback";
 
 function App() {

@@ -1,6 +1,6 @@
 {
-  "homepage": "https://trubo4ka911.github.io/goit-react-hw-04-hooks-feedback/",
   "name": "goit-react-hw-04-hooks-feedback",
+  "homepage": "https://trubo4ka911.github.io/goit-react-hw-04-hooks-feedback/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +13,7 @@
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^3.0.1",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
@@ -27,8 +27,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -44,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.5.0",
+    "eslint": "^6.8.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.4",
     "prettier": "^2.5.1"
